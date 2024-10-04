@@ -1,5 +1,5 @@
 /**
- * The config folder contains configuration related things.
+ * The config folder contains configuration related information.
  */
 
 const dotenv = require("dotenv");
