@@ -1,0 +1,16 @@
+{
+  "name": "starterproject",
+  "version": "1.0.0",
+  "description": "Creating a starter Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon src/index.js"
+  },
+  "author": "chandramadi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "nodemon": "^3.1.7"
+  }
+}
