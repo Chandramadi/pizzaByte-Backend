@@ -10,36 +10,41 @@ async function registerUser(userDetails){
         };
     }
 
-    const user = await findUser({ // find the user if already exists.
-        email:userDetails.email,
-        phoneNumber:userDetails.phoneNumber
-    });
+    try{
+        const user = await findUser({ // find the user if already exists.
+            email:userDetails.email,
+            phoneNumber:userDetails.phoneNumber
+        });
 
-    if(user){
-        throw {
-            reason:"User with the given email and mobile number already exits.",
-            statusCode:400,
+        if(user){
+            throw {
+                reason:"User with the given email and mobile number already exits.",
+                statusCode:400,
+            }
+        }
+
+        // If the user doesnot exists create one.
+        const newUser = await createUser({
+            email:userDetails.email,
+            phoneNumber:userDetails.phoneNumber,
+            password:userDetails.password,
+            firstName:userDetails.firstName,
+            lastName:userDetails.lastName,
+        });
+
+        // Return the created user( success response)
+        return{
+            success:true,
+            data:newUser,
         }
     }
-
-    // If the user doesnot exists create one.
-    const newUser = await createUser({
-        email:userDetails.email,
-        phoneNumber:userDetails.phoneNumber,
-        password:userDetails.password,
-        firstName:userDetails.firstName,
-        lastName:userDetails.lastName,
-    });
-
-    // If for any reason, unable to create user throw an error.
-    if(!newUser){
+    catch(error){
+        // Throw error to be caught by the controller
         throw {
-            reason:"Something went wrong, cannot create user.",
-            statusCode:500,
-        }
+            reason: error.reason || error.message || "Internal error",
+            statusCode: error.statusCode || 500
+        };
     }
-
-    return newUser;
 }    
 
 

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
     firstName:{
@@ -40,6 +41,13 @@ const userSchema = new mongoose.Schema({
     }
 },{
     timestamps:true,
+})
+
+// This is pre hook (It is like trigger in database.)
+// The pre() method doesnot accepts arrow func as argument.
+userSchema.pre("save",async function(){
+    // Hash the password before saving it in the database.
+    this.password = await bcrypt.hash(this.password,10);
 })
 
 const User = mongoose.model("User",userSchema);

@@ -2,6 +2,7 @@ const express = require("express");
 const serverConfig = require("./config/serverConfig");
 const dbConfig = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
+const {authRoute}  = require("./routes/authRoute");
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // User Route middleware
 app.use("/user",userRoute);
+app.use("/auth",authRoute);
 
 app.listen(serverConfig.PORT, async()=>{
     await dbConfig.connectDb();
