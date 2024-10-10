@@ -9,5 +9,6 @@ dotenv.config();
 module.exports = {
     PORT : process.env.PORT,
     DB_URL : process.env.DB_URL,
-    Secret_key:process.env.Secret_key,
+    Secret_key:process.env.Secret_key, 
+    jwt_expiry: process.env.jwt_expiry
 }

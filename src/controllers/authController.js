@@ -7,10 +7,15 @@ async function authController(req,res){
         // Generate the token
         const response = await authServices(loginDetails);
 
+        res.cookie('auth',response,{
+            maxAge:24*60*1000,
+            httpOnly: true,
+        })
+
         return res.status(200).json({
-            message:"Successfully created the token",
+            message:"Login successfully",
             success: true,
-            token:response,
+            token:{},
         })
 
     }catch(error){
@@ -20,7 +25,6 @@ async function authController(req,res){
             error:error,
         })
     }
-
 }
 
 

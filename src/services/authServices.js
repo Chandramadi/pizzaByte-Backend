@@ -1,7 +1,7 @@
 const { findUser } = require("../repositories/userRepository");
 const bcrypt = require("bcrypt");
 const jswWebtoken = require("jsonwebtoken");
-const { Secret_key } = require("../config/serverConfig");
+const { Secret_key ,jwt_expiry} = require("../config/serverConfig");
 
 async function authServices(loginDetails){
     // if the body is empty
@@ -44,9 +44,9 @@ async function authServices(loginDetails){
         const jwt = jswWebtoken.sign(
             {email:user.email, userId:user._id},
             Secret_key,
-            { expiresIn: '1h' }
+            { expiresIn: jwt_expiry }
         );
-
+        
         return jwt;
 
     }catch(error){

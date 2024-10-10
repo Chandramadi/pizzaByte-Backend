@@ -1,4 +1,6 @@
 const express = require("express");
+const cookie_parser = require("cookie-parser");
+
 const serverConfig = require("./config/serverConfig");
 const dbConfig = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
@@ -6,6 +8,7 @@ const {authRoute}  = require("./routes/authRoute");
 
 const app = express();
 
+app.use(cookie_parser()); // cookie parser
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
