@@ -2,9 +2,10 @@ const express = require("express");
 const cookie_parser = require("cookie-parser");
 
 const serverConfig = require("./config/serverConfig");
-const dbConfig = require("./config/dbConfig");
+const { connectDb } = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
+const { isLoggedIn } = require("./validation/authValidator");
 
 const app = express();
 
@@ -18,8 +19,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/user",userRoute);
 app.use("/auth",authRoute);
 
+// Testing route
+app.get("/",isLoggedIn, (req,res)=>{
+    console.log(req.cookies);
+    return res.send({
+        message:"Hello",
+        email : req.user.email,
+        userId : req.user.userId,
+    })
+})
+
 app.listen(serverConfig.PORT, async()=>{
-    await dbConfig.connectDb();
+    await connectDb();
     console.log(`Server started on port number ${serverConfig.PORT}.`);
 })
 
