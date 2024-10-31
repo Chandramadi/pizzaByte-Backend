@@ -5,6 +5,8 @@ const serverConfig = require("./config/serverConfig");
 const { connectDb } = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
+const {productRoute}  = require("./routes/productRoute");
+
 
 const app = express();
 
@@ -17,23 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // User Route middleware
 app.use("/user",userRoute);
 app.use("/auth",authRoute);
-
-// Testing route
-const upload = require("./middlewares/multermiddleware");
-const cloudinary = require("./config/cloudinaryConfig");
-const fs = require("fs/promises");
-app.post("/image",upload.single("uploadFile"), async (req,res)=>{
-    const uploadResult = await cloudinary.uploader
-       .upload(req.file.path)
-       .catch((error) => {
-           console.log(error);
-       });
-    console.log(uploadResult);
-    await fs.unlink(req.file.path);
-    return res.send({
-        message:"ok",
-    })
-})
+app.use("/product",productRoute);
 
 app.listen(serverConfig.PORT, async()=>{
     await connectDb();
