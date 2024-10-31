@@ -5,7 +5,6 @@ const serverConfig = require("./config/serverConfig");
 const { connectDb } = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
-const { isLoggedIn } = require("./validation/authValidator");
 
 const app = express();
 
@@ -20,12 +19,11 @@ app.use("/user",userRoute);
 app.use("/auth",authRoute);
 
 // Testing route
-app.get("/",isLoggedIn, (req,res)=>{
-    console.log(req.cookies);
+const upload = require("./middlewares/multermiddleware")
+app.post("/image",upload.single("uploadFile"), (req,res)=>{
+    console.log(req.file);
     return res.send({
-        message:"Hello",
-        email : req.user.email,
-        userId : req.user.userId,
+        message:"ok",
     })
 })
 
