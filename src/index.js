@@ -19,9 +19,17 @@ app.use("/user",userRoute);
 app.use("/auth",authRoute);
 
 // Testing route
-const upload = require("./middlewares/multermiddleware")
-app.post("/image",upload.single("uploadFile"), (req,res)=>{
-    console.log(req.file);
+const upload = require("./middlewares/multermiddleware");
+const cloudinary = require("./config/cloudinaryConfig");
+const fs = require("fs/promises");
+app.post("/image",upload.single("uploadFile"), async (req,res)=>{
+    const uploadResult = await cloudinary.uploader
+       .upload(req.file.path)
+       .catch((error) => {
+           console.log(error);
+       });
+    console.log(uploadResult);
+    await fs.unlink(req.file.path);
     return res.send({
         message:"ok",
     })
