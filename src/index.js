@@ -7,7 +7,6 @@ const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
 const {productRoute}  = require("./routes/productRoute");
 
-
 const app = express();
 
 app.use(cookie_parser()); // cookie parser
@@ -19,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 // User Route middleware
 app.use("/user",userRoute);
 app.use("/auth",authRoute);
-app.use("/product",productRoute);
+app.use("/products",productRoute);
 
 app.listen(serverConfig.PORT, async()=>{
     await connectDb();

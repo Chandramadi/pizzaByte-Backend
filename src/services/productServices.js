@@ -1,6 +1,8 @@
-const {createProduct} = require("../repositories/productRepository");
+const {createProduct,getProduct,deleteProduct} = require("../repositories/productRepository");
 const cloudinary = require("../config/cloudinaryConfig");
 const fs = require("fs/promises");
+const InternServerError = require("../utils/internalServerError");
+const NotFoundError = require("../utils/notFoundError");
 
 async function addProducts(productDetails){
     // upload the image in cloudinary only if provided
@@ -11,10 +13,7 @@ async function addProducts(productDetails){
             await fs.unlink(productDetails.productImage);
         }
         catch(error){
-            throw {
-                reason : "Unable to upload image.",
-                statusCode: 500,
-            }
+            throw new InternServerError();
         }
     }
 
@@ -27,14 +26,33 @@ async function addProducts(productDetails){
         return productAdded;
     }
     catch(error){
-        throw {
-            reason : "Not able to create product.",
-            statusCode: 500,
-        }
+        throw new InternServerError();
     }
     
 }
 
+async function getProductById(productId){
+
+    if(productId){
+        const receivedProduct = await getProduct(productId);
+        if(!receivedProduct){
+            throw new NotFoundError('Product');
+        }
+        return receivedProduct;
+    }
+}
+
+async function deleteProductById(productId){
+
+    const deletedProduct = await deleteProduct(productId);
+    if(!deletedProduct){
+        throw new NotFoundError("Product");
+    }
+    return deletedProduct;
+}
+
 module.exports = {
     addProducts,
+    getProductById,
+    deleteProductById,
 }
