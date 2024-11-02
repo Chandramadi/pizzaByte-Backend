@@ -20,6 +20,14 @@ app.use("/user",userRoute);
 app.use("/auth",authRoute);
 app.use("/products",productRoute);
 
+// test route
+const {isLoggedIn} = require("./validation/authValidator");
+app.get("/login",isLoggedIn,(req,res)=>{
+    res.send({
+        message:"successful",
+    })
+})
+
 app.listen(serverConfig.PORT, async()=>{
     await connectDb();
     console.log(`Server started on port number ${serverConfig.PORT}.`);

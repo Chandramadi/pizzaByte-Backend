@@ -1,5 +1,5 @@
 const { findUser } = require("../repositories/userRepository");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt"); // for 
 const jswWebtoken = require("jsonwebtoken");
 const { Secret_key ,jwt_expiry} = require("../config/serverConfig");
 
@@ -40,9 +40,11 @@ async function authServices(loginDetails){
             }
         }
 
+        // Check if the user role is set already else assign 'USER'.
+        const userRole = user.role?user.role:'USER';
         // create the jswWebtoken
         const jwt = jswWebtoken.sign(
-            {email:user.email, userId:user._id},
+            {email:user.email, userId:user._id, role:userRole},
             Secret_key,
             { expiresIn: jwt_expiry }
         );

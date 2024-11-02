@@ -1,6 +1,7 @@
 const { authServices } = require("../services/authServices");
 
 async function authController(req,res){
+    // The user must provide email and password to login.
     const loginDetails = req.body;
 
     try{
@@ -26,7 +27,6 @@ async function authController(req,res){
         })
     }
 }
-
 
 module.exports = {
     authController,

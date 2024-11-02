@@ -30,6 +30,7 @@ async function registerUser(userDetails){
             password:userDetails.password,
             firstName:userDetails.firstName,
             lastName:userDetails.lastName,
+            role:userDetails.role,
         });
 
         // Return the created user( success response)
