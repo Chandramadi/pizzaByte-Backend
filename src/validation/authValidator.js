@@ -2,6 +2,8 @@ const jswWebtoken = require("jsonwebtoken");
 const {Secret_key} = require("../config/serverConfig");
 const UnauthorisedError = require("../utils/unauthorisedError");
 
+// This is a middleware for isLoggedIn check.
+// It is using the auth cookie for verification.
 async function isLoggedIn(req,res,next){
 
     const authToken = req.cookies['auth'];

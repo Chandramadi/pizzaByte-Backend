@@ -1,4 +1,5 @@
 const { authServices } = require("../services/authServices");
+const AppError = require("../utils/AppError");
 
 async function authController(req,res){
     // The user must provide email and password to login.
@@ -17,13 +18,24 @@ async function authController(req,res){
             message:"Login successfully",
             success: true,
             token:{},
+            error:{},
         })
 
     }catch(error){
-        return res.status(error.statusCode || 500).json({
+        console.log(error);
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
+            })
+        }
+        return res.status(500).json({
             success:false,
-            message:error.message || "Internal server error.",
+            message:"Internal server error.",
             error:error,
+            data:{},
         })
     }
 }

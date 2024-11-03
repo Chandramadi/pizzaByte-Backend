@@ -1,7 +1,7 @@
 const {registerUser} = require("../services/userService");
+const AppError = require("../utils/AppError");
 
 // UserRoute controller 
-
 async function createUser(req,res){
 
     try{
@@ -15,28 +15,27 @@ async function createUser(req,res){
             })
         }
         const response = await registerUser(userDataBody);
-        
-        if(response.success){
-            return res.status(201).json({
-                message:"Successfully created the user.",
-                success:true,
-                data:response.data,
+        return res.status(201).json({
+            message:"Successfully created the user.",
+            success:true,
+            error:{},
+            data:response,
+        })
+
+    }catch(error){
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
             })
         }
-
-        // if(response.data.name=="ValidationError"){
-        //     return res.status(500).json({
-        //         message:"Internal Server Error",
-        //         success:true,
-        //         data:response.data,
-        //     })
-        // }
-        
-    }catch(error){
-        return res.status(error.statusCode || 500).json({
-            message:error.reason || "Internal Server Error",
+        return res.status(500).json({
+            message:"Something went wrong",
             success:false,
             error:error,
+            data:{},
         })
     }
 }
