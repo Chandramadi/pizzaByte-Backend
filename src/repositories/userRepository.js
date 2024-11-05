@@ -18,18 +18,19 @@ async function findUser(userData){
 // findUser function for registration
 // Only create user if the user doesnot exists.
 async function findUserRegistration(userData){
-    try{
-        const user = await User.findOne(userData);
-        return user;
-    }
-    catch(error){
+
+    const user = await User.findOne(userData);
+    if(user){
         throw new InternalServerError();
     }
+    return user;
+    
 }
 
 // Create an user Function
 async function createUser(userData){
     try{
+        console.log("bye");
         const user = await User.create(userData);
         return user;
     }catch(error){

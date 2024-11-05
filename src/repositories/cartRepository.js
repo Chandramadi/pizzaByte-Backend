@@ -1,6 +1,7 @@
 const Cart = require("../schema/cartSchema");
 const InternalServerError = require('../utils/internalServerError');
 const BadRequestError = require("../utils/badRequestError");
+
 async function createCart(userId) {
     try{
         const createdCart = await Cart.create(userId);
@@ -18,6 +19,18 @@ async function createCart(userId) {
     }
 }
 
+// Only loggedIn user can get the cart.
+async function getCart(user){
+    try{
+        const cart = await Cart.findOne(user).populate("user");
+        return cart;
+    }
+    catch(error){
+        throw new InternalServerError();
+    }
+}
+
 module.exports = {
     createCart,
+    getCart,
 }

@@ -1,8 +1,6 @@
 const {findUserRegistration,createUser} = require("../repositories/userRepository");
 const {createCart} = require("../repositories/cartRepository");
 const BadRequestError = require("../utils/badRequestError");
-const InternServerError = require("../utils/internalServerError");
-const AppError = require("../utils/AppError");
 
 async function registerUser(userDetails){
 
@@ -20,6 +18,7 @@ async function registerUser(userDetails){
     }
 
     try{
+        console.log("hi");
         // If the user doesnot exists create one.
         const newUser = await createUser({
             email:userDetails.email,
@@ -28,6 +27,11 @@ async function registerUser(userDetails){
             firstName:userDetails.firstName,
             lastName:userDetails.lastName,
             role:userDetails.role,
+        });
+        console.log(newUser);
+        // create a cart for every newly created user.
+        await createCart({
+            user:newUser._id,
         });
 
         // Return the created user( success response)

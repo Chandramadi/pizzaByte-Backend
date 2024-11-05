@@ -6,6 +6,7 @@ const { connectDb } = require("./config/dbConfig");
 const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
 const {productRoute}  = require("./routes/productRoute");
+const { cartRoute } = require("./routes/cartRoute");
 
 const app = express();
 
@@ -19,14 +20,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/user",userRoute);
 app.use("/auth",authRoute);
 app.use("/products",productRoute);
+app.use("/cart",cartRoute);
 
 // test route
-const {isLoggedIn} = require("./validation/authValidator");
-app.get("/login",isLoggedIn,(req,res)=>{
-    res.send({
-        message:"successful",
-    })
-})
+// const {isLoggedIn} = require("./validation/authValidator");
+
+// app.get("/login",isLoggedIn,(req,res)=>{
+//     res.send({
+//         message:"successful",
+//     })
+// })
 
 app.listen(serverConfig.PORT, async()=>{
     await connectDb();
