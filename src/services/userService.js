@@ -18,7 +18,6 @@ async function registerUser(userDetails){
     }
 
     try{
-        console.log("hi");
         // If the user doesnot exists create one.
         const newUser = await createUser({
             email:userDetails.email,
@@ -28,7 +27,6 @@ async function registerUser(userDetails){
             lastName:userDetails.lastName,
             role:userDetails.role,
         });
-        console.log(newUser);
         // create a cart for every newly created user.
         await createCart({
             user:newUser._id,

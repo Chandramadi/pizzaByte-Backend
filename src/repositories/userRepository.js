@@ -30,7 +30,6 @@ async function findUserRegistration(userData){
 // Create an user Function
 async function createUser(userData){
     try{
-        console.log("bye");
         const user = await User.create(userData);
         return user;
     }catch(error){

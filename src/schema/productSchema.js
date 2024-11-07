@@ -28,6 +28,11 @@ const productSchema = new mongoose.Schema({
         required : [true, "In stock staus is required."],
         default : true,
     },
+    quantity:{
+        type:Number,
+        default:10,
+        required:true,
+    },
 },{
     timestamps:true,
 })
