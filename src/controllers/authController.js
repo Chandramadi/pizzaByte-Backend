@@ -40,6 +40,18 @@ async function authController(req,res){
     }
 }
 
+function logout(req,res){
+    
+    res.cookie("auth","");
+    return res.status(200).json({
+        success:true,
+        message:"Logout successfull",
+        data:{},
+        error:{},
+    })
+}
+
 module.exports = {
     authController,
+    logout
 }
