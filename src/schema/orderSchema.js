@@ -42,6 +42,22 @@ const orderSchema = new mongoose.Schema({
     timestamps:true,
 })
 
+// Add pre 'find' hook
+orderSchema.pre("findOne",function(next){
+    this.populate("items.product");
+    next();
+})
+
+orderSchema.pre("find",function(next){
+    this.populate("items.product");
+    next();
+})
+
+orderSchema.pre("findOneAndUpdate", function(next) {
+    this.populate("items.product");
+    next();
+});
+
 const Order = mongoose.model('Order',orderSchema);
 
 module.exports = Order;
