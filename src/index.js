@@ -7,6 +7,7 @@ const {userRoute}  = require("./routes/userRoute");
 const {authRoute}  = require("./routes/authRoute");
 const {productRoute}  = require("./routes/productRoute");
 const { cartRoute } = require("./routes/cartRoute");
+const {orderRoute} = require("./routes/orderRoute");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/user",userRoute);
 app.use("/auth",authRoute);
 app.use("/products",productRoute);
 app.use("/cart",cartRoute);
+app.use("/orders",orderRoute);
 
 // test route
 // const {isLoggedIn} = require("./validation/authValidator");
