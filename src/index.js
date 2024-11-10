@@ -26,7 +26,7 @@ app.use("/orders",orderRoute);
 
 // test route
 
-app.get("/hello",(req,res)=>{
+app.get("/",(req,res)=>{
     res.send({
         message:"Welcome!",
     })
