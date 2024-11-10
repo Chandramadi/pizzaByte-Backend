@@ -1,5 +1,5 @@
 const {createOrderByUserId,getAllOrdersByUserId,getOrdersByOrderId,updateOrderStatus}  = require("../services/orderService");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 
 async function createOrder(req,res){
     try{

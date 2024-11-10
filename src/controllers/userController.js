@@ -1,5 +1,5 @@
 const {registerUser} = require("../services/userService");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 
 // UserRoute controller 
 async function createUser(req,res){

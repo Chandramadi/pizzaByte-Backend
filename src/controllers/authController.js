@@ -1,5 +1,5 @@
 const { authServices } = require("../services/authServices");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 
 async function authController(req,res){
     // The user must provide email and password to login.

@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt"); // for
 const jswWebtoken = require("jsonwebtoken");
 const { Secret_key ,jwt_expiry} = require("../config/serverConfig");
 const BadRequestError = require("../utils/badRequestError");
-const AppError = require("../utils/AppError");
 const JswWebtokenError = require("../utils/jswWebtokenError");
 
 async function authServices(loginDetails){

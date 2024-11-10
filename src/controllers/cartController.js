@@ -1,5 +1,5 @@
 const {getCartByUser,modifyProductToCart,clearProductFromCart} = require("../services/cartService");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 
 async function getCart(req, res){
     try{

@@ -2,7 +2,7 @@ const {getCart,deleteProductFromCart} = require("../repositories/cartRepository"
 const NotFoundError = require("../utils/notFoundError");
 const { getProduct } = require("../repositories/productRepository");
 const BadRequestError = require("../utils/badRequestError");
-const AppError = require("../utils/AppError");
+const AppError = require("../utils/appError");
 
 async function getCartByUser(userId){
     
