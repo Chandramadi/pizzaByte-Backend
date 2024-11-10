@@ -7,7 +7,7 @@ dotenv.config();
 
 // Exporting all the env variables.
 module.exports = {
-    PORT : process.env.PORT,
+    PORT : process.env.PORT || 4000,
     DB_URL : process.env.DB_URL,
     Secret_key:process.env.Secret_key, 
     jwt_expiry: process.env.jwt_expiry,
