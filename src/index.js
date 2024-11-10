@@ -25,17 +25,15 @@ app.use("/cart",cartRoute);
 app.use("/orders",orderRoute);
 
 // test route
-// const {isLoggedIn} = require("./validation/authValidator");
 
-// app.get("/login",isLoggedIn,(req,res)=>{
-//     res.send({
-//         message:"successful",
-//     })
-// })
+app.get("/hello",(req,res)=>{
+    res.send({
+        message:"Welcome!",
+    })
+})
 
 app.listen(serverConfig.PORT, async()=>{
     await connectDb();
     console.log(`Server started on port number ${serverConfig.PORT}.`);
 })
-
 
