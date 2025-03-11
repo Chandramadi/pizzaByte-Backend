@@ -10,10 +10,10 @@ async function isLoggedIn(req,res,next){
 
     if(!authToken){
         return res.status(401).json({
-            success: false,
+            success : false,
             message : "No auth token provided.",
-            error:"Not authenticated",
-            data:{},
+            error : "Not authenticated",
+            data : {},
         })
     }
 

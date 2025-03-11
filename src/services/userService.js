@@ -5,8 +5,8 @@ const BadRequestError = require("../utils/badRequestError");
 async function registerUser(userDetails){
 
     // Manual validation of required fields
-    if (!userDetails.email || !userDetails.phoneNumber || !userDetails.password || !userDetails.firstName || !userDetails.lastName) {
-        throw new BadRequestError(["Missing required fields: email, phoneNumber, password, firstName, lastName"]);
+    if (!userDetails.email || !userDetails.phoneNumber || !userDetails.password || !userDetails.firstName) {
+        throw new BadRequestError(["Missing required fields: email, phoneNumber, password, firstName"]);
     }
 
     const user = await findUserRegistration({ // find the user if already exists.
