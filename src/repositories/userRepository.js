@@ -20,9 +20,6 @@ async function findUser(userData){
 async function findUserRegistration(userData){
 
     const user = await User.findOne(userData);
-    if(user){
-        throw new InternalServerError();
-    }
     return user;
     
 }

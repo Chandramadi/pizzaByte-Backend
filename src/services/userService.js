@@ -41,7 +41,6 @@ async function registerUser(userDetails){
     }
 }    
 
-
 module.exports = {
     registerUser,
 }

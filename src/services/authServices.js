@@ -43,7 +43,10 @@ async function authServices(loginDetails){
             { expiresIn: jwt_expiry }
         );
         
-        return jwt;
+        return {jwt, userRole, userData : {
+            email : user.email,
+            firstName : user.firstName,
+        }}
 
     }catch(error){
         // Ensure that errors have proper status codes
