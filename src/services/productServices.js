@@ -1,4 +1,4 @@
-const {createProduct,getProduct,deleteProduct} = require("../repositories/productRepository");
+const {createProduct,getProduct, getAllProducts, deleteProduct} = require("../repositories/productRepository");
 const cloudinary = require("../config/cloudinaryConfig");
 const fs = require("fs/promises");
 const InternServerError = require("../utils/internalServerError");
@@ -42,6 +42,15 @@ async function getProductById(productId){
     }
 }
 
+async function getProductsAll(){
+
+    const receivedProduct = await getAllProducts();
+    if(!receivedProduct){
+        throw new NotFoundError('Product');
+    }
+    return receivedProduct;
+}
+
 async function deleteProductById(productId){
 
     const deletedProduct = await deleteProduct(productId);
@@ -55,4 +64,5 @@ module.exports = {
     addProducts,
     getProductById,
     deleteProductById,
+    getProductsAll,
 }

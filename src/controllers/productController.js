@@ -1,4 +1,4 @@
-const {addProducts,getProductById,deleteProductById} = require("../services/productServices");
+const {addProducts,getProductById, getProductsAll, deleteProductById} = require("../services/productServices");
 const AppError = require("../utils/appError"); 
 
 async function productController(req,res){
@@ -65,6 +65,35 @@ async function getProductController(req, res){
     }
 }
 
+async function getAllProductsController(req, res){
+
+    try{
+        const response = await getProductsAll();
+        return res.status(200).json({
+            success: true,
+            message:"Successfully retrived the product.",
+            data: response,
+            error:{},
+        })
+    }
+    catch(error){
+        if(error instanceof AppError){
+            return res.status(error.statusCode).json({
+                success:false,
+                message:error.message,
+                data:{},
+                error:error,
+            })
+        }
+        return res.status(500).json({
+            message:"Something went wrong",
+            error: error,
+            success: false,
+            data:{},
+        })
+    }
+}
+
 async function deleteProductController(req, res){
 
     try{
@@ -98,4 +127,5 @@ module.exports = {
     productController,
     getProductController,
     deleteProductController,
+    getAllProductsController,
 }

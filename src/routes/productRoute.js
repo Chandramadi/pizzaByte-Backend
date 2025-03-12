@@ -1,5 +1,5 @@
 const express = require("express");
-const {productController,getProductController,deleteProductController} = require("../controllers/productController");
+const {productController,getProductController, getAllProductsController, deleteProductController} = require("../controllers/productController");
 const productRoute = express.Router();
 const upload = require("../middlewares/multermiddleware"); // multer for file upload.
 const { isLoggedIn, isAdmin } = require("../validation/authValidator");
@@ -16,6 +16,12 @@ productRoute.get("/:id",
     isLoggedIn,
     isAdmin,
     getProductController
+);
+
+productRoute.get("/",
+    isLoggedIn,
+    isAdmin,
+    getAllProductsController
 );
 
 productRoute.delete("/:id",
