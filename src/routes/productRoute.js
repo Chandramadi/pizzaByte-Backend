@@ -4,7 +4,7 @@ const productRoute = express.Router();
 const upload = require("../middlewares/multermiddleware"); // multer for file upload.
 const { isLoggedIn, isAdmin } = require("../validation/authValidator");
 
-// Only the admin is allowed to access productRoute.
+// Only the admin is allowed to post and delete products
 productRoute.post("/",
     isLoggedIn,
     isAdmin,
@@ -12,15 +12,15 @@ productRoute.post("/",
     productController
 );
 
-productRoute.get("/:id",
-    isLoggedIn,
-    isAdmin,
+productRoute.get("/:id", // get products by id
+    // isLoggedIn,
+    // isAdmin,
     getProductController
 );
 
-productRoute.get("/",
-    isLoggedIn,
-    isAdmin,
+productRoute.get("/", // get all the products
+    // isLoggedIn,
+    // isAdmin,
     getAllProductsController
 );
 
