@@ -10,6 +10,7 @@ async function productController(req,res){
             price:req.body.price,
             category:req.body.category,
             inStock:req.body.inStock,
+            quantity : req.body.quantity,
         });
         return res.status(201).json({
             message:"Successfully added the product.",

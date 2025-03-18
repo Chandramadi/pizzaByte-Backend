@@ -25,7 +25,6 @@ async function authController(req,res){
         })
 
     }catch(error){
-        console.log(error);
         if(error instanceof AppError){
             return res.status(error.statusCode).json({
                 success:false,

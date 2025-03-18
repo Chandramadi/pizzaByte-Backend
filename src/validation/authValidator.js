@@ -1,5 +1,5 @@
 const jswWebtoken = require("jsonwebtoken");
-const {Secret_key} = require("../config/serverConfig");
+const {Secret_key, jwt_expiry} = require("../config/serverConfig");
 const UnauthorisedError = require("../utils/unauthorisedError");
 
 // This is a middleware for isLoggedIn check.
@@ -45,8 +45,18 @@ async function isLoggedIn(req,res,next){
             req.user = 'chal';
             console.log(req.user);  // Outputs: 'chal'
          */
+
+        next();
         
     }catch(error){
+        if(error.name==="TokenExpiredError") {
+            return res.status(401).json({
+                success : false,
+                message : "No auth token provided.",
+                error : "Not authenticated",
+                data : {},
+            })
+        }
         return res.status(400).json({
             success : false,
             message : "Invalid token provided.",
@@ -55,7 +65,6 @@ async function isLoggedIn(req,res,next){
         })
     }
     
-    next();
 }
 
 /** 

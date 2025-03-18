@@ -11,7 +11,6 @@ async function createOrderByUserId(userId,paymentMethod){
         user:userId,
     })
     
-
     const user = await findUser({ _id: cart.user});
     
     // If cart is not present throw an error.
@@ -43,7 +42,7 @@ async function createOrderByUserId(userId,paymentMethod){
     // create the new order
     const order = await createNewOrder(orderObject);
 
-    if(!order) {
+    if(!order) {        
         throw new InternalServerError();
     }
 
