@@ -14,7 +14,7 @@ const app = express();
 
 // Move CORS middleware before routes
 app.use(cors({
-    origin: "https://pizzabyte-three.vercel.app", // No trailing slash
+    origin: serverConfig.frontend_url, // No trailing slash
     credentials: true // Allow credentials (cookies, sessions, etc.)
 }));
 

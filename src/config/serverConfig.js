@@ -14,4 +14,5 @@ module.exports = {
     cloudinary_name : process.env.cloudinary_name,
     cloudinary_key : process.env.cloudinary_key,
     cloudinary_secret : process.env.cloudinary_secret,
+    frontend_url : process.env.frontend_url,
 }
