@@ -34,13 +34,17 @@ async function modifyProductToCart(userId, productId, shouldAdd=true){
         throw new BadRequestError(["Product is out of stock."]);
     }
 
+    // Find the index of the product in the cart
+    // findIndex will return -1 if not found.
+    let index = cart.items.findIndex(value => value.product._id.equals(productId));
+
     // check if the product is already in the cart
     let flag = false;
-    if(cart.items.length>0 && cart.items[0].product._id == productId){
+    if(cart.items.length>0 && index!=-1){
         if(shouldAdd){
             // add product
-            if(product.quantity >= cart.items[0].quantity+1){
-                cart.items[0].quantity+=quantityValue;
+            if(product.quantity >= cart.items[index].quantity+1){
+                cart.items[index].quantity+=quantityValue;
                 flag = true;
             }
             else{
@@ -49,11 +53,11 @@ async function modifyProductToCart(userId, productId, shouldAdd=true){
         }
         else{
             // remove product
-            if(cart.items[0].quantity>0){
+            if(cart.items[index].quantity>0){
                 flag = true;
-                cart.items[0].quantity+=quantityValue;
+                cart.items[index].quantity+=quantityValue;
                 // if the product in the cart is zero, then do not display the product.
-                if(cart.items[0].quantity==0){
+                if(cart.items[index].quantity==0){
                     cart.items = cart.items.filter(item => item.product._id != productId);
                 }
             }
