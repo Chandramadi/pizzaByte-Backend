@@ -12,6 +12,12 @@ const {orderRoute} = require("./routes/orderRoute");
 
 const app = express();
 
+// Render backend log check
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
+    next();
+});
+
 // Move CORS middleware before routes
 app.use(cors({
     origin: serverConfig.frontend_url, // No trailing slash
