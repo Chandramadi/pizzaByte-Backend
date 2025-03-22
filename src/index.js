@@ -23,6 +23,7 @@ app.use(cors({
     origin: serverConfig.frontend_url, // No trailing slash
     credentials: true // Allow credentials (cookies, sessions, etc.)
 }));
+console.log(serverConfig.frontend_url);
 
 app.use(cookie_parser()); // cookie parser
 app.use(express.json());
