@@ -17,6 +17,8 @@ async function authController(req, res) {
             path: '/',
         })
 
+        console.log(response.jwt);
+
         return res.status(200).json({
             message: "Login successfully",
             success: true,

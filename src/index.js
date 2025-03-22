@@ -12,18 +12,13 @@ const {orderRoute} = require("./routes/orderRoute");
 
 const app = express();
 
-// Render backend log check
-app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.originalUrl}`);
-    next();
-});
+app.set('trust proxy', 1); // add this at the top before cookies
 
 // Move CORS middleware before routes
 app.use(cors({
     origin: serverConfig.frontend_url, // No trailing slash
     credentials: true // Allow credentials (cookies, sessions, etc.)
 }));
-console.log(serverConfig.frontend_url);
 
 app.use(cookie_parser()); // cookie parser
 app.use(express.json());
