@@ -14,6 +14,7 @@ async function authController(req, res) {
             httpOnly: true,
             secure: true,               // required for cross-origin cookie (HTTPS)
             sameSite: "None",           // allow across origins
+            path: '/',
         })
 
         return res.status(200).json({
