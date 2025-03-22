@@ -13,7 +13,7 @@ async function authController(req, res) {
             maxAge: 24 * 60 * 1000,
             httpOnly: true,
             secure: true,               // required for cross-origin cookie (HTTPS)
-            sameSite: "None",           // allow across origins
+            sameSite: "Lax",           // allow across origins
             path: '/',
         })
 
