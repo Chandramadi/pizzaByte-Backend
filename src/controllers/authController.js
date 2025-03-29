@@ -16,8 +16,6 @@ async function authController(req, res) {
             sameSite: "none",           // allow across origins
         })
 
-        console.log(response.jwt);
-
         return res.status(200).json({
             message: "Login successfully",
             success: true,

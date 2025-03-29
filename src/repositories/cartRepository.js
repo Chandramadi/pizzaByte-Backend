@@ -6,7 +6,6 @@ const NotFoundError = require("../utils/notFoundError");
 async function createCart(userId) {
     try{
         const createdCart = await Cart.create(userId);
-        // console.log(createdCart);
         return createdCart;
     }
     catch(error){

@@ -43,7 +43,6 @@ async function isLoggedIn(req,res,next){
             };
             // Adding a new property to the object
             req.user = 'chal';
-            console.log(req.user);  // Outputs: 'chal'
          */
 
         next();
