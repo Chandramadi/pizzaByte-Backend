@@ -32,12 +32,12 @@ app.use("/products", productRoute);
 app.use("/cart", cartRoute);
 app.use("/orders", orderRoute);
 
-// // test route
-// app.get("/", (req, res) => {
-//     res.send({
-//         message: "Welcome!",
-//     })
-// })
+// test route
+app.get("/", (req, res) => {
+    res.send({
+        message: "Welcome!",
+    })
+})
 
 app.listen(serverConfig.PORT, async () => {
     await connectDb();
